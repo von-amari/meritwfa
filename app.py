@@ -20,8 +20,8 @@ def running(proj_id):
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    # browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    browser = driver = webdriver.Chrome(executable_path='C:/bin/chromedriver.exe')
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    # browser = driver = webdriver.Chrome(executable_path='C:/bin/chromedriver.exe')
     # service = Service(executable_path=ChromeDriverManager().install())
     # browser = webdriver.Chrome(service=service)
 
