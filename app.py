@@ -3,12 +3,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import os
 from flask import Flask
-
-
 app = Flask(__name__)
-# api = Api(app)
 
-project_id = "5ULP1bcIZA55orxTQ5NnVxqIlvixfWQM"
+
+@app.route("/")
+def index():
+    return "Hello World!"
 
 
 @app.route('/id/<proj_id>', methods=['GET'])
@@ -57,4 +57,5 @@ def running(proj_id):
     return got_text
 
 
-running(project_id)
+
+
