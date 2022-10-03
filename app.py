@@ -14,14 +14,14 @@ def index():
 @app.route('/id/<proj_id>', methods=['GET'])
 def running(proj_id):
     got_text = ""
-
+    return_dict = {}
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     # browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    browser = driver = webdriver.Chrome(executable_path='C:/bin/chromedriver.exe')
+    browser = webdriver.Chrome(executable_path='C:/bin/chromedriver.exe')
     # service = Service(executable_path=ChromeDriverManager().install())
     # browser = webdriver.Chrome(service=service)
 
@@ -43,20 +43,26 @@ def running(proj_id):
     # browser.find_element(by=By.CLASS_NAME, value="bill").click()
     # time.sleep(2)
     parts = browser.find_element(by=By.CLASS_NAME, value="parts-content")
-    got_text = got_text + parts.text
     time.sleep(2)
+    icon_qty = parts.find_element(by=By.CLASS_NAME, value="parts-icon")
+    return_dict["qty"] = icon_qty.text
     part_text = parts.find_elements(by=By.CLASS_NAME, value="parts-text")
 
     for i in range(len(part_text)):
+        if i == 0:
+            return_dict["name"] = part_text[i].text
         if i == 1:
             part_text[i].click()
+            time.sleep(1)
             got_text = got_text + part_text[i].text
+            return_dict["details"] = part_text[i].text
             print(got_text)
-
+        if i == 2:
+            return_dict["price"] = part_text[i].text
+        if i == 3:
+            return_dict["create_date"] = part_text[i].text
     # return json.dumps(data)
-    browser.close()
-    return got_text
 
-
-
+    print(return_dict)
+    return return_dict
 
