@@ -65,5 +65,6 @@ def running(proj_id):
     # return json.dumps(data)
 
     print(return_dict)
+    browser.close()
     return return_dict
 
